@@ -76,6 +76,14 @@ GameManager.prototype.addRandomTile = function () {
     var tile = new Tile(this.grid.randomAvailableCell(), value);
 
     this.grid.insertTile(tile);
+    if (!this.movesAvailable()) {
+      tile.value = tile.value / 2; 
+      this.grid.insertTile(tile);
+    }
+    while (!this.movesAvailable()) {
+      tile.value = tile.value * 2; 
+      this.grid.insertTile(tile);
+    }
   }
 };
 
