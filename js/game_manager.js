@@ -85,7 +85,7 @@ GameManager.prototype.addRandomTile = function () {
     }*/
     if (!this.movesAvailable()){
       setTimeout("value = value",2000);
-      alert("No moves. Randomly exchange two tiles.");
+      //alert("No moves. Randomly exchange two tiles.");
       var nowx1 = Math.floor(Math.random()*4);
       var nowy1 = Math.floor(Math.random()*4);
       var nowx2 = Math.floor(Math.random()*4);
