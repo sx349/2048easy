@@ -85,30 +85,37 @@ GameManager.prototype.addRandomTile = function () {
     }*/
     if (!this.movesAvailable()){
       alert("No moves. Randomly exchange two tiles.");
-      var nowx1 = Math.floor(Math.random()*4)+ 1
-      var nowy1 = Math.floor(Math.random()*4)+ 1
-      var nowx2 = Math.floor(Math.random()*4)+ 1
-      var nowy2 = Math.floor(Math.random()*4)+ 1
+      var nowx1 = Math.floor(Math.random()*4);
+      var nowy1 = Math.floor(Math.random()*4);
+      var nowx2 = Math.floor(Math.random()*4);
+      var nowy2 = Math.floor(Math.random()*4);
       if (nowx1 === nowx2 && nowy1 === nowy2) {
-        nowy2 = nowy2 % 4 + 1;
+        nowy2 = (nowy2 + 1) % 4;
       }
-      var t = this.grid.cells[nowx1][nowy1].value;
-      this.grid.cells[nowx1][nowy1].value = this.grid.cells[nowx2][nowy2].value;
-      this.grid.cells[nowx2][nowy2].value = t;
+      var value1 = this.grid.cells[nowx1][nowy1].value;
+      var value2 = this.grid.cells[nowx2][nowy2].value;
+      tile.x = nowx1; tile.y = nowy1; tile.value = value2;
+      this.grid.insertTile(tile);
+      tile.x = nowx2; tile.y = nowy2; tile.value = value1;
+      this.grid.insertTile(tile);
       while (!this.movesAvailable()){
-        t = this.grid.cells[nowx1][nowy1].value;
-        this.grid.cells[nowx1][nowy1].value = this.grid.cells[nowx2][nowy2].value;
-        this.grid.cells[nowx2][nowy2].value = t;
-        nowx1 = Math.floor(Math.random()*4)+ 1
-        nowy1 = Math.floor(Math.random()*4)+ 1
-        nowx2 = Math.floor(Math.random()*4)+ 1
-        nowy2 = Math.floor(Math.random()*4)+ 1
+        tile.x = nowx1; tile.y = nowy1; tile.value = value1;
+        this.grid.insertTile(tile);
+        tile.x = nowx2; tile.y = nowy2; tile.value = value2;
+        this.grid.insertTile(tile);
+        nowx1 = Math.floor(Math.random()*4);
+        nowy1 = Math.floor(Math.random()*4);
+        nowx2 = Math.floor(Math.random()*4);
+        nowy2 = Math.floor(Math.random()*4);
         if (nowx1 === nowx2 && nowy1 === nowy2) {
-          nowy2 = nowy2 % 4 + 1;
+          nowy2 = (nowy2 + 1) % 4;
         }
-        t = this.grid.cells[nowx1][nowy1].value;
-        this.grid.cells[nowx1][nowy1].value = this.grid.cells[nowx2][nowy2].value;
-        this.grid.cells[nowx2][nowy2].value = t;
+        value1 = this.grid.cells[nowx1][nowy1].value;
+        value2 = this.grid.cells[nowx2][nowy2].value;
+        tile.x = nowx1; tile.y = nowy1; tile.value = value2;
+        this.grid.insertTile(tile);
+        tile.x = nowx2; tile.y = nowy2; tile.value = value1;
+        this.grid.insertTile(tile);
       }
     }
   }
