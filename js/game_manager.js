@@ -92,17 +92,19 @@ GameManager.prototype.addRandomTile = function () {
       if (nowx1 === nowx2 && nowy1 === nowy2) {
         nowy2 = (nowy2 + 1) % 4;
       }
-      var value1 = this.grid.cells[nowx1][nowy1].value;
-      var value2 = this.grid.cells[nowx2][nowy2].value;
-      tile.x = nowx1; tile.y = nowy1; tile.value = value2;
-      this.grid.insertTile(tile);
-      tile.x = nowx2; tile.y = nowy2; tile.value = value1;
-      this.grid.insertTile(tile);
+      var tile1 = this.grid.cells[nowx1][nowy1];
+      var tile2 = this.grid.cells[nowx2][nowy2];
+      var value1 = tile1.value;
+      var value2 = tile2.value;
+      tile1.value = value2;
+      this.grid.insertTile(tile1);
+      tile2.value = value1;
+      this.grid.insertTile(tile2);
       while (!this.movesAvailable()){
-        tile.x = nowx1; tile.y = nowy1; tile.value = value1;
-        this.grid.insertTile(tile);
-        tile.x = nowx2; tile.y = nowy2; tile.value = value2;
-        this.grid.insertTile(tile);
+        tile1.value = value1;
+        this.grid.insertTile(tile1);
+        tile2.value = value2;
+        this.grid.insertTile(tile2);
         nowx1 = Math.floor(Math.random()*4);
         nowy1 = Math.floor(Math.random()*4);
         nowx2 = Math.floor(Math.random()*4);
@@ -110,12 +112,14 @@ GameManager.prototype.addRandomTile = function () {
         if (nowx1 === nowx2 && nowy1 === nowy2) {
           nowy2 = (nowy2 + 1) % 4;
         }
-        value1 = this.grid.cells[nowx1][nowy1].value;
-        value2 = this.grid.cells[nowx2][nowy2].value;
-        tile.x = nowx1; tile.y = nowy1; tile.value = value2;
-        this.grid.insertTile(tile);
-        tile.x = nowx2; tile.y = nowy2; tile.value = value1;
-        this.grid.insertTile(tile);
+        tile1 = this.grid.cells[nowx1][nowy1];
+        tile2 = this.grid.cells[nowx2][nowy2];
+        value1 = tile1.value;
+        value2 = tile2.value;
+        tile1.value = value2;
+        this.grid.insertTile(tile1);
+        tile2.value = value1;
+        this.grid.insertTile(tile2);
       }
     }
   }
