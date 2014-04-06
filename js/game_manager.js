@@ -74,15 +74,42 @@ GameManager.prototype.addRandomTile = function () {
   if (this.grid.cellsAvailable()) {
     var value = Math.random() < 0.9 ? 2 : 4;
     var tile = new Tile(this.grid.randomAvailableCell(), value);
-
     this.grid.insertTile(tile);
-    if (!this.movesAvailable()) {
+    /*if (!this.movesAvailable()) {
       tile.value = tile.value / 2; 
       this.grid.insertTile(tile);
     }
     while (!this.movesAvailable()) {
       tile.value = tile.value * 2; 
       this.grid.insertTile(tile);
+    }*/
+    if (!this.movesAvailable()){
+      alert("No moves. Randomly exchange two tiles.");
+      var nowx1 = Math.floor(Math.random()*4)+ 1
+      var nowy1 = Math.floor(Math.random()*4)+ 1
+      var nowx2 = Math.floor(Math.random()*4)+ 1
+      var nowy2 = Math.floor(Math.random()*4)+ 1
+      if (nowx1 === nowx2 && nowy1 === nowy2) {
+        nowy2 = nowy2 % 4 + 1;
+      }
+      var t = this.grid.cells[nowx1][nowy1].value;
+      this.grid.cells[nowx1][nowy1].value = this.grid.cells[nowx2][nowy2].value;
+      this.grid.cells[nowx2][nowy2].value = t;
+      while (!this.movesAvailable()){
+        t = this.grid.cells[nowx1][nowy1].value;
+        this.grid.cells[nowx1][nowy1].value = this.grid.cells[nowx2][nowy2].value;
+        this.grid.cells[nowx2][nowy2].value = t;
+        nowx1 = Math.floor(Math.random()*4)+ 1
+        nowy1 = Math.floor(Math.random()*4)+ 1
+        nowx2 = Math.floor(Math.random()*4)+ 1
+        nowy2 = Math.floor(Math.random()*4)+ 1
+        if (nowx1 === nowx2 && nowy1 === nowy2) {
+          nowy2 = nowy2 % 4 + 1;
+        }
+        t = this.grid.cells[nowx1][nowy1].value;
+        this.grid.cells[nowx1][nowy1].value = this.grid.cells[nowx2][nowy2].value;
+        this.grid.cells[nowx2][nowy2].value = t;
+      }
     }
   }
 };
